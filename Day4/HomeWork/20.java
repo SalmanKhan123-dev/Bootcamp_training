@@ -19,8 +19,7 @@ class Solution {
                 stack.push(ch);
             } 
             else {
-
-                if (stack.isEmpty() || stack.pop() != pairs.get(ch)) {
+                if (stack.isEmpty() || !stack.pop().equals(pairs.get(ch))) {
                     return false;
                 }
             }
