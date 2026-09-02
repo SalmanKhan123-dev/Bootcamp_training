@@ -1,26 +1,26 @@
-class Solution {
-    public void sortColors(int[] nums) {
-        int low=0;int high=nums.length-1;
-        int mid=0;
-        while(mid<=high){
-            if(nums[mid]==0){
-                int temp=nums[low];
-                nums[low]=nums[mid];
-                nums[mid]=temp;
-                low++;
-                mid++;
-            }else if(nums[mid]==1){
-                mid++;
-            }
-            else{
-                int temp=nums[mid];
-                nums[mid]=nums[high];
-                nums[high]=temp;
-                high--;
-            }
+import java.util.*;
 
-            
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+
+        List<int[]> result = new ArrayList<>();
+
+        int start = intervals[0][0];
+        int end = intervals[0][1];
+
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] <= end) {
+                end = Math.max(end, intervals[i][1]);
+            } else {
+                result.add(new int[]{start, end});
+                start = intervals[i][0];
+                end = intervals[i][1];
+            }
         }
-        
+
+        result.add(new int[]{start, end});
+
+        return result.toArray(new int[result.size()][]);
     }
 }
